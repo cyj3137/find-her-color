@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <style type="text/css">
+
+        #container {
+  position: relative;
+background-size: cover
+}
+
+.draggable {
+  position: absolute;
+  cursor: move;
+}
+
+        body{background: url(findbackground.jpg); margin: auto; background-size: cover;background-position: top; background-repeat: no-repeat;height: 100vh; text-align: center;}
+        
+
+
+    </style>
+
+    <title>Find Her Color</title>
+</head>
+<body>
+
+  <div id="container">
+  <img src="per1.png" alt="Image 1" class="draggable">
+  <img src="per2.png" alt="Image 2" class="draggable">
+  <img src="per3.png" alt="Image 3" class="draggable">
+  <img src="per4.png" alt="Image 4" class="draggable">
+  
+ 
+</div>
+
+    <script type="text/javascript">
+
+   let activeElement = null;
+
+document.addEventListener("mousedown", (event) => {
+  if (event.target.classList.contains("draggable")) {
+    activeElement = event.target;
+    activeElement.style.cursor = "grabbing";
+    const offsetX = event.clientX - activeElement.getBoundingClientRect().left;
+    const offsetY = event.clientY - activeElement.getBoundingClientRect().top;
+
+    document.addEventListener("mousemove", moveHandler);
+
+    function moveHandler(event) {
+      activeElement.style.left = event.clientX - offsetX + "px";
+      activeElement.style.top = event.clientY - offsetY + "px";
+    }
+
+    document.addEventListener("mouseup", () => {
+      activeElement.style.cursor = "grab";
+      document.removeEventListener("mousemove", moveHandler);
+      activeElement = null;
+    });
+  }
+});
+
+    </script>
+
+</body>
+
+
+</html> 
